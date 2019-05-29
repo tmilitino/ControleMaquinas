@@ -17,6 +17,9 @@ namespace Computador.Models
 
         public string Setor { get; set; }
 
+        public string Marca { get; set; }
+
+
 
     }
 

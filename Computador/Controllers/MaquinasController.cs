@@ -54,7 +54,7 @@ namespace Computador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Chave,Setor")] Maquina maquina)
+        public async Task<IActionResult> Create([Bind("Id,Chave,Setor,Marca")] Maquina maquina)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Computador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Chave,Setor")] Maquina maquina)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Chave,Setor,Marca")] Maquina maquina)
         {
             if (id != maquina.Id)
             {

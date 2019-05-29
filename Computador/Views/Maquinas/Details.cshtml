@@ -1,10 +1,10 @@
 ﻿@model Computador.Models.Maquina
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detales";
 }
 
-<h2>Details</h2>
+<h2>Detales</h2>
 
 <div>
     <h4>Maquina</h4>
@@ -22,9 +22,15 @@
         <dd>
             @Html.DisplayFor(model => model.Setor)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Voltar para Lista</a>
 </div>
