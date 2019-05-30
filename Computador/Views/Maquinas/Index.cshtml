@@ -10,10 +10,17 @@
     <a asp-action="Create">Novo</a>
 </p>
 
-<form>
-    <label class="control-label">Busca</label>
-    <input type="text" />
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Buscar: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Buscar" class="btn btn-default" /> |
+            <a asp-action="Index">Lista Completa</a>
+        </p>
+    </div>
 </form>
+
+
 <table class="table">
     <thead>
         <tr>

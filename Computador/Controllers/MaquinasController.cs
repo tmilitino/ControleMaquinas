@@ -20,9 +20,19 @@ namespace Computador.Controllers
         }
 
         // GET: Maquinas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Maquina.ToListAsync());
+            ViewData["CurrentFilter"] = searchString;
+
+            var maq = from s in _context.Maquina
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                maq = maq.Where(s => s.Marca.Contains(searchString)
+                                       || s.Setor.Contains(searchString) 
+                                       || s.Chave.Contains(searchString));
+            }
+            return View(await maq.AsNoTracking().ToListAsync());
         }
 
         // GET: Maquinas/Details/5
