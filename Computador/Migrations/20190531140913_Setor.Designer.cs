@@ -2,15 +2,17 @@
 using Computador;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Computador.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20190531140913_Setor")]
+    partial class Setor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,11 +29,9 @@ namespace Computador.Migrations
 
                     b.Property<string>("Marca");
 
-                    b.Property<int>("SetorId");
+                    b.Property<string>("Setor");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SetorId");
 
                     b.ToTable("Maquina");
                 });
@@ -46,14 +46,6 @@ namespace Computador.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Setor");
-                });
-
-            modelBuilder.Entity("Computador.Models.Maquina", b =>
-                {
-                    b.HasOne("Computador.Models.Setor", "Setor")
-                        .WithMany("Maquinas")
-                        .HasForeignKey("SetorId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
