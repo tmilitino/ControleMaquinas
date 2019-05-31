@@ -11,11 +11,19 @@ namespace Computador.Models
         {
         }
 
+        public Maquina(string id, string chave, Setor setor, string marca)
+        {
+            Id = id;
+            Chave = chave;
+            Setor = setor;
+            Marca = marca;
+        }
+
         public string Id { get; set; }
 
         public string Chave { get; set; }
 
-        public string Setor { get; set; }
+        public Setor Setor { get; set; }
 
         public string Marca { get; set; }
 
