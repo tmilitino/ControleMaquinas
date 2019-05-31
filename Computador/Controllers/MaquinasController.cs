@@ -55,6 +55,7 @@ namespace Computador.Controllers
         // GET: Maquinas/Create
         public IActionResult Create()
         {
+            ViewData["SetorId"] = new SelectList(_context.Setor,"Id","Nome");
             return View();
         }
 
@@ -63,14 +64,19 @@ namespace Computador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Chave,Setor,Marca")] Maquina maquina)
+        public async Task<IActionResult> Create([Bind("Id,Chave,SetorId,Marca")] Maquina maquina)
         {
+            
+            
+
             if (ModelState.IsValid)
             {
                 _context.Add(maquina);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["SetorId"] = new SelectList(_context.Setor, "Id", "Nome", maquina.SetorId);
             return View(maquina);
         }
 
