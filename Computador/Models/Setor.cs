@@ -11,7 +11,7 @@ namespace Computador.Models
         {
         }
 
-        public Setor(int id, string nome, List<Maquina> maquinas)
+        public Setor(int id, string nome, ICollection<Maquina> maquinas)
         {
             Id = id;
             Nome = nome;
@@ -22,6 +22,6 @@ namespace Computador.Models
 
         public string Nome { get; set; }
 
-        public List<Maquina> Maquinas { get; set; } = new List<Maquina>();
+        public ICollection<Maquina> Maquinas { get; private set; }
     }
 }

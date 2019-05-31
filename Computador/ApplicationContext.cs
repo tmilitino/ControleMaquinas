@@ -19,15 +19,15 @@ namespace Computador
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Setor>().HasKey(t => t.Id);
-            modelBuilder.Entity<Setor>().HasMany(t => t.Maquinas).WithOne(t => t.Setor);
+            modelBuilder.Entity<Setor>().HasMany(t => t.Maquinas).WithOne(dt => dt.Setor);
 
             modelBuilder.Entity<Maquina>().HasKey(t => t.Id);
             modelBuilder.Entity<Maquina>().HasOne(t => t.Setor);
 
         }
 
-        public DbSet<Computador.Models.Maquina> Maquina { get; set; }
-        public DbSet<Computador.Models.Setor> Setor { get; set; }
+        public DbSet<Maquina> Maquina { get; set; }
+        public DbSet<Setor> Setor { get; set; }
 
     }
 }

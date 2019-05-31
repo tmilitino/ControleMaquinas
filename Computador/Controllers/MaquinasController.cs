@@ -29,8 +29,7 @@ namespace Computador.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 maq = maq.Where(s => s.Marca.Contains(searchString)
-                                       || s.Setor.Contains(searchString) 
-                                       || s.Chave.Contains(searchString));
+                                  || s.Chave.Contains(searchString));
             }
             return View(await maq.AsNoTracking().ToListAsync());
         }
