@@ -13,25 +13,27 @@ namespace Computador.Models
         {
         }
 
-        public Maquina(string id, string chave, Setor setor, string marca)
+        public Maquina(string id, string chave, int setorId, string marca)
         {
             Id = id;
             Chave = chave;
-            Setor = setor;
+            SetorId = setorId;
             Marca = marca;
         }
 
+        [Key]
+        [Required]
         public string Id { get; set; }
 
         public string Chave { get; set; }
 
-        [Required]
+       
         public int SetorId { get; set; }
 
 
-        [Required]
+        
         [ForeignKey("SetorId")]
-        public Setor Setor { get; private set; } = new Setor();
+        public Setor Setor { get; private set; }
 
         public string Marca { get; set; }
 
