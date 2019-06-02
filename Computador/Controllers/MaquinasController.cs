@@ -31,6 +31,8 @@ namespace Computador.Controllers
                 maq = maq.Where(s => s.Marca.Contains(searchString)
                                   || s.Chave.Contains(searchString));
             }
+
+
             return View(await maq.AsNoTracking().ToListAsync());
         }
 
@@ -55,6 +57,7 @@ namespace Computador.Controllers
         // GET: Maquinas/Create
         public IActionResult Create()
         {
+            ViewBag.Setores = new SelectList(_context.Setor,"Id","Nome");
             return View();
         }
 
@@ -63,14 +66,19 @@ namespace Computador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Chave,Setor,Marca")] Maquina maquina)
+        public async Task<IActionResult> Create([Bind("Id,Chave,SetorId,Marca")] Maquina maquina)
         {
+            
+
             if (ModelState.IsValid)
             {
                 _context.Add(maquina);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Setores = new SelectList(_context.Setor, "Id", "Id", maquina.SetorId);
+
             return View(maquina);
         }
 
@@ -95,7 +103,7 @@ namespace Computador.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Chave,Setor,Marca")] Maquina maquina)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Chave,SetorId,Marca")] Maquina maquina)
         {
             if (id != maquina.Id)
             {
