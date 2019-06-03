@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System    ;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Computador;
 using Computador.Models;
+using Computador.ViewModel;
 
 namespace Computador.Controllers
 {
@@ -24,12 +25,20 @@ namespace Computador.Controllers
         {
             ViewData["CurrentFilter"] = searchString;
 
-            var maq = from s in _context.Maquina
-                           select s;
+            var maq = (from s in _context.Maquina
+                       join f in _context.Setor on s.SetorId equals f.Id
+                       select new MaquinaVieWModel()
+                       {
+                           Id = s.Id,
+                           Chave = s.Chave,
+                           SetorNome = f.Nome,
+                           Marca = s.Marca
+                       });
             if (!String.IsNullOrEmpty(searchString))
             {
                 maq = maq.Where(s => s.Marca.Contains(searchString)
-                                  || s.Chave.Contains(searchString));
+                                  || s.Chave.Contains(searchString)
+                                  || s.SetorNome.Contains(searchString));
             }
 
 

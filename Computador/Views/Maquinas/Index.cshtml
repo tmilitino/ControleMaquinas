@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Computador.Models.Maquina>
+﻿@model IEnumerable<Computador.ViewModel.MaquinaVieWModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -28,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.Chave)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SetorId)
+                @Html.DisplayNameFor(model => model.SetorNome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Marca)
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Chave)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SetorId)
+                @Html.DisplayFor(modelItem => item.SetorNome)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Marca)
