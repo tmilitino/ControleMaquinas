@@ -1,4 +1,4 @@
-﻿using System    ;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -59,8 +59,21 @@ namespace Computador.Controllers
             {
                 return NotFound();
             }
+            var maq = (from s in _context.Maquina
+                       join f in _context.Setor on s.SetorId equals f.Id
+                       select new MaquinaVieWModel()
+                       {
+                           Id = s.Id,
+                           Chave = s.Chave,
+                           SetorNome = f.Nome,
+                           Marca = s.Marca
+                       });
+            if (!String.IsNullOrEmpty(id))
+            {
+                maq = maq.Where(s => s.Id.Contains(id));
+            }
 
-            return View(maquina);
+            return View(await maq.AsNoTracking().ToListAsync());
         }
 
         // GET: Maquinas/Create
@@ -76,9 +89,7 @@ namespace Computador.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Chave,SetorId,Marca")] Maquina maquina)
-        {
-            
-
+        { 
             if (ModelState.IsValid)
             {
                 _context.Add(maquina);
@@ -86,7 +97,7 @@ namespace Computador.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Setores = new SelectList(_context.Setor, "Id", "Id", maquina.SetorId);
+            ViewBag.Setores = new SelectList(_context.Setor, "Id", "Nome", maquina.SetorId);
 
             return View(maquina);
         }
@@ -104,6 +115,9 @@ namespace Computador.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.Setores = new SelectList(_context.Setor, "Id", "Nome");
+
             return View(maquina);
         }
 
@@ -139,6 +153,9 @@ namespace Computador.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Setores = new SelectList(_context.Setor, "Id", "Nome", maquina.SetorId);
+
             return View(maquina);
         }
 
@@ -157,7 +174,22 @@ namespace Computador.Controllers
                 return NotFound();
             }
 
-            return View(maquina);
+
+            var maq = (from s in _context.Maquina
+                       join f in _context.Setor on s.SetorId equals f.Id
+                       select new MaquinaVieWModel()
+                       {
+                           Id = s.Id,
+                           Chave = s.Chave,
+                           SetorNome = f.Nome,
+                           Marca = s.Marca
+                       });
+            if (!String.IsNullOrEmpty(id))
+            {
+                maq = maq.Where(s => s.Id.Contains(id));
+            }
+
+            return View(await maq.AsNoTracking().ToListAsync());
         }
 
         // POST: Maquinas/Delete/5

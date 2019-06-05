@@ -1,4 +1,5 @@
-﻿@model Computador.Models.Maquina
+﻿@model IEnumerable<Computador.ViewModel.MaquinaVieWModel>
+
 
 @{
     ViewData["Title"] = "Detales";
@@ -6,31 +7,41 @@
 
 <h2>Detales</h2>
 
-<div>
-    <h4>Maquina</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Chave)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Chave)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Setor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Setor)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Marca)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Marca)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
-    <a asp-action="Index">Voltar para Lista</a>
-</div>
+@foreach (var item in Model)
+{
+    <div>
+        <h4>Maquina</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.Chave)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Chave)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.Marca)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.SetorNome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.SetorNome)
+            </dd>
+        </dl>
+
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+        <a asp-action="Index">Voltar para Lista</a> | <a asp-action="Delete" asp-route-id="@item.Id">Editar</a>
+    </div>
+}
