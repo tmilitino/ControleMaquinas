@@ -1,4 +1,4 @@
-﻿@model Computador.Models.Maquina
+﻿@model IEnumerable<Computador.ViewModel.MaquinaVieWModel>
 
 @{
     ViewData["Title"] = "Delete";
@@ -10,30 +10,40 @@
 <div>
     <h4>Maquina</h4>
     <hr />
+
+    @foreach (var item in Model)
+    {
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Chave)
+            @Html.DisplayNameFor(modelItem => item.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Chave)
+            @Html.DisplayFor(modelItem => item.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Setor)
+            @Html.DisplayNameFor(modelItem => item.Chave)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Setor)
+            @Html.DisplayFor(modelItem => item.Chave)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Marca)
+            @Html.DisplayNameFor(modelItem => item.Marca)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Marca)
+            @Html.DisplayFor(modelItem => item.Marca)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.SetorNome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.SetorNome)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="@item.Id" />
         <input type="submit" value="Deletar" class="btn btn-default" /> |
         <a asp-action="Index">Voltar para Lista</a>
     </form>
+    }
 </div>
